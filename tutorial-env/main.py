@@ -49,12 +49,12 @@ swagBackpack = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
 swagBackpack.click()
 time.sleep(2)
 
-# 3. Validate "Add to cart" button has updated text to "Remove"
+# 3. Validate "Add to cart" button has updated text to "REMOVE"
 swagRemove = driver.find_element(By.ID, "remove-sauce-labs-backpack")
 print("swagRemove.text: ", swagRemove.text)
 try:
-    assert "Remove" in swagRemove.text
-    print("Add to Cart changed to Remove")
+    assert "REMOVE" in swagRemove.text
+    print("Add to Cart changed to REMOVE")
 except:
     print("Add to Cart did not change as expected. ")
     
@@ -123,7 +123,7 @@ logoutBtn.click()
 time.sleep(1)
 
 # 14. Validate back at login screen
-print("loginUserField: ", loginUserField, "\nloginUserPassword: ", loginUserPassword, "\nloginBtn: ", loginBtn)
+# print("loginUserField.text: ", loginUserField.text, "\nloginUserPassword.text: ", loginUserPassword.text, "\nloginBtn.text: ", loginBtn.text)
 try:
     assert loginUserField and loginUserPassword and loginBtn
     print("Logon username, password, and logon button loaded successfully")

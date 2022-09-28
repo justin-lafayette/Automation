@@ -34,12 +34,23 @@ inventoryList = [
     ]
 """
 
+swagItem = driver.find_element(By.CLASS_NAME, "inventory_item")
+itemPrice = driver.find_element(By.CLASS_NAME, "inventory_item_price")
+# print(swagItem.itemPrice)
+# for i in swagItem:
+#     print(i.text)
+
 # swagList= driver.find_element(By.CLASS_NAME, "inventory_list")
-# # root = ET.fromstring(driver)
+# print(ET.tostring(swagList))
+# root = ET.fromstring(driver)
 # swagItems= []
 # for i in driver.find_element(By.CLASS_NAME, "inventory_list"):
 #     swagItems.append(ET.tostring(i))
 #     print(str(ET.tostring(i) + b"\n"))
+
+# print("swagItems: ", swagItems)
+time.sleep(20)
+
 
 # swagTitle = driver.find_element(By.ID, "item_4_title_link").text
 # swagPrice = driver.find_element(By.CLASS_NAME)

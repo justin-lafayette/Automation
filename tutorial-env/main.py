@@ -19,7 +19,7 @@ time.sleep(1)
 
 loginBtn = driver.find_element(By.ID, "login-button")
 loginBtn.click()
-time.sleep(1)
+time.sleep(2)
 
 # 1. Get title and price of backpack
 # Need to understand how to return text of a child container as a variable when the parent container does not have a unique identifier
@@ -47,15 +47,17 @@ inventoryList = [
 # 2. Click add to cart
 swagBackpack = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
 swagBackpack.click()
-time.sleep(1)
+time.sleep(2)
 
 # 3. Validate "Add to cart" button has updated text to "Remove"
 swagRemove = driver.find_element(By.ID, "remove-sauce-labs-backpack")
+print("swagRemove.text: ", swagRemove.text)
 try:
     assert "Remove" in swagRemove.text
     print("Add to Cart changed to Remove")
 except:
-    print("Add to Cart did not change as expected")
+    print("Add to Cart did not change as expected. ")
+    
 time.sleep(1)
 
 # 4. Click shopping cart icon
@@ -70,11 +72,12 @@ time.sleep(1)
 
 # 6. Validate shipping info page is shown
 swagShippingInfo = driver.find_element(By.CLASS_NAME, "checkout_info")
+print("swagShippingInfo.text: ", swagShippingInfo.text)
 try:
     assert swagShippingInfo
     print("Page header shows for your information page")
 except:
-    print("Page header does not show information")
+    print("Page header does not show information") 
 
 # 7. Insert shipping info and continue
 checkoutFirstName = driver.find_element(By.ID, "first-name")
@@ -120,9 +123,10 @@ logoutBtn.click()
 time.sleep(1)
 
 # 14. Validate back at login screen
+print("loginUserField: ", loginUserField, "\nloginUserPassword: ", loginUserPassword, "\nloginBtn: ", loginBtn)
 try:
     assert loginUserField and loginUserPassword and loginBtn
     print("Logon username, password, and logon button loaded successfully")
     
 except:
-    print("One or all of logon page IDs did not load properly")
+    print("One or all of logon page IDs did not load properly") 

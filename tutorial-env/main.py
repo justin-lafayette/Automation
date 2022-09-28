@@ -17,7 +17,7 @@ loginUserPassword = driver.find_element(By.ID, "password")
 loginUserPassword.send_keys("secret_sauce")
 time.sleep(1)
 
-loginBtn = driver.find_element_by_id("login-button")
+loginBtn = driver.find_element(By.ID, "login-button")
 loginBtn.click
 time.sleep(1)
 

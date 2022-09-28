@@ -17,9 +17,9 @@ loginUserPassword = driver.find_element(By.ID, "password")
 loginUserPassword.send_keys("secret_sauce")
 time.sleep(1)
 
-loginBtn = driver.find_element_by_id("login-button")
-loginBtn.click
-time.sleep(1)
+loginBtn = driver.find_element(By.ID, "login-button")
+loginBtn.click()
+time.sleep(2)
 
 # 1. Get title and price of backpack
 # Need to understand how to return text of a child container as a variable when the parent container does not have a unique identifier
@@ -46,35 +46,38 @@ inventoryList = [
 
 # 2. Click add to cart
 swagBackpack = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
-swagBackpack.click
-time.sleep(1)
+swagBackpack.click()
+time.sleep(2)
 
-# 3. Validate "Add to cart" button has updated text to "Remove"
+# 3. Validate "Add to cart" button has updated text to "REMOVE"
 swagRemove = driver.find_element(By.ID, "remove-sauce-labs-backpack")
+print("swagRemove.text: ", swagRemove.text)
 try:
-    assert "Remove" in swagRemove.text
-    print("Add to Cart changed to Remove")
+    assert "REMOVE" in swagRemove.text
+    print("Add to Cart changed to REMOVE")
 except:
-    print("Add to Cart did not change as expected")
+    print("Add to Cart did not change as expected. ")
+    
 time.sleep(1)
 
 # 4. Click shopping cart icon
 swagCart = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
-swagCart.click
+swagCart.click()
 time.sleep(1)
 
 # 5. Click checkout button
 swagCheckOut = driver.find_element(By.ID, "checkout")
-swagCheckOut.click
+swagCheckOut.click()
 time.sleep(1)
 
 # 6. Validate shipping info page is shown
 swagShippingInfo = driver.find_element(By.CLASS_NAME, "checkout_info")
+print("swagShippingInfo.text: ", swagShippingInfo.text)
 try:
     assert swagShippingInfo
     print("Page header shows for your information page")
 except:
-    print("Page header does not show information")
+    print("Page header does not show information") 
 
 # 7. Insert shipping info and continue
 checkoutFirstName = driver.find_element(By.ID, "first-name")
@@ -90,7 +93,7 @@ checkoutPostalCode.send_keys("01234")
 time.sleep(1)
 
 checkoutContinue = driver.find_element(By.ID, "continue")
-checkoutContinue.click
+checkoutContinue.click()
 time.sleep(1)
 
 # 8. Validate backpack is in cart using previously stored variables
@@ -99,7 +102,7 @@ time.sleep(1)
 
 # 10. Click finish button
 checkoutFinish = driver.find_element(By.ID, "finish")
-checkoutFinish.click
+checkoutFinish.click()
 time.sleep(1)
 
 # 11. Validate thank you page appears
@@ -107,22 +110,23 @@ checkoutCompleteContainer = driver.find_element(By.ID, "checkout_complete_contai
 
 # 12. Click home button
 returnHomeBtn = driver.find_element(By.ID, "back-to-products")
-returnHomeBtn.click
+returnHomeBtn.click()
 time.sleep(1)
 
 # 13. Log out
 burgerMenu = driver.find_element(By.ID, "react-burger-menu-btn")
-burgerMenu.click
+burgerMenu.click()
 time.sleep(1)
 
 logoutBtn = driver.find_element(By.ID, "logout_sidebar_link")
-logoutBtn.click
+logoutBtn.click()
 time.sleep(1)
 
 # 14. Validate back at login screen
+# print("loginUserField.text: ", loginUserField.text, "\nloginUserPassword.text: ", loginUserPassword.text, "\nloginBtn.text: ", loginBtn.text)
 try:
     assert loginUserField and loginUserPassword and loginBtn
     print("Logon username, password, and logon button loaded successfully")
     
 except:
-    print("One or all of logon page IDs did not load properly")
+    print("One or all of logon page IDs did not load properly") 

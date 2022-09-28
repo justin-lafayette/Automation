@@ -1,16 +1,21 @@
-from multiprocessing.connection import wait
-import time
+import os, time
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
-driver.get("https://www.google.com")
+# File path for drivers # TODO: Add Firefox
+chromeDriverFilePath = os.getcwd() + "/drivers/chromedriver.exe"
 
-googleInputSearch = driver.find_element(By.NAME, "q")
+# Instanciate driver and set website to open
+chromeDriver = webdriver.Chrome(chromeDriverFilePath)
+chromeDriver.get("https://www.google.com")
+
+# Enter "heatwave temperature" in the google search bar
+googleInputSearch = chromeDriver.find_element(By.NAME, "q")
 googleInputSearch.send_keys("heatwave temperature")
 
+# Wait for keyboard input to finish
 time.sleep(3)
 
-googleSearchButton = driver.find_element(By.NAME, "btnK")
+# Click search and go to next page
+googleSearchButton = chromeDriver.find_element(By.NAME, "btnK")
 googleSearchButton.click()

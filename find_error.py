@@ -1,10 +1,15 @@
 from ast import Try
-import time
+import time, os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
+# File path for drivers # TODO: Add Firefox
+chromeDriverFilePath = os.getcwd() + "/drivers/chromedriver.exe"
+
+# Instanciate driver and set website to open
+driver = webdriver.Chrome(chromeDriverFilePath)
+
 driver.get("https://www.saucedemo.com")
 # sleepyTime = time.sleep(1)
 

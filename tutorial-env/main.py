@@ -18,7 +18,7 @@ loginUserPassword.send_keys("secret_sauce")
 time.sleep(1)
 
 loginBtn = driver.find_element(By.ID, "login-button")
-loginBtn.click
+loginBtn.click()
 time.sleep(1)
 
 # 1. Get title and price of backpack
@@ -46,7 +46,7 @@ inventoryList = [
 
 # 2. Click add to cart
 swagBackpack = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
-swagBackpack.click
+swagBackpack.click()
 time.sleep(1)
 
 # 3. Validate "Add to cart" button has updated text to "Remove"
@@ -60,12 +60,12 @@ time.sleep(1)
 
 # 4. Click shopping cart icon
 swagCart = driver.find_element(By.CLASS_NAME, "shopping_cart_link")
-swagCart.click
+swagCart.click()
 time.sleep(1)
 
 # 5. Click checkout button
 swagCheckOut = driver.find_element(By.ID, "checkout")
-swagCheckOut.click
+swagCheckOut.click()
 time.sleep(1)
 
 # 6. Validate shipping info page is shown
@@ -90,7 +90,7 @@ checkoutPostalCode.send_keys("01234")
 time.sleep(1)
 
 checkoutContinue = driver.find_element(By.ID, "continue")
-checkoutContinue.click
+checkoutContinue.click()
 time.sleep(1)
 
 # 8. Validate backpack is in cart using previously stored variables
@@ -99,7 +99,7 @@ time.sleep(1)
 
 # 10. Click finish button
 checkoutFinish = driver.find_element(By.ID, "finish")
-checkoutFinish.click
+checkoutFinish.click()
 time.sleep(1)
 
 # 11. Validate thank you page appears
@@ -107,16 +107,16 @@ checkoutCompleteContainer = driver.find_element(By.ID, "checkout_complete_contai
 
 # 12. Click home button
 returnHomeBtn = driver.find_element(By.ID, "back-to-products")
-returnHomeBtn.click
+returnHomeBtn.click()
 time.sleep(1)
 
 # 13. Log out
 burgerMenu = driver.find_element(By.ID, "react-burger-menu-btn")
-burgerMenu.click
+burgerMenu.click()
 time.sleep(1)
 
 logoutBtn = driver.find_element(By.ID, "logout_sidebar_link")
-logoutBtn.click
+logoutBtn.click()
 time.sleep(1)
 
 # 14. Validate back at login screen

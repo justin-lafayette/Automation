@@ -1,12 +1,17 @@
-from ast import If, Try
-import time
+from ast import Assert, If, Try
+import time, os
 import xml.etree.ElementTree as ET
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-driver = webdriver.Chrome()
-driver.get("https://www.saucedemo.com")
+#os.chdir('../')
+#os.getcwd() + "\drivers\chromedriver.exe"
+chromeDriverFilePath = "C:\\Users\\Office PC\\Desktop\\Projects\\Automation\\drivers\\chromedriver.exe" 
+print(chromeDriverFilePath)
+
+driver = webdriver.Chrome(chromeDriverFilePath)
+driver.get("https://www.saucedemo.com/")
 
 # 0. Log into site
 loginUserField = driver.find_element(By.ID, "user-name")
@@ -23,7 +28,7 @@ time.sleep(2)
 
 # 1. Get title and price of backpack
 # Need to understand how to return text of a child container as a variable when the parent container does not have a unique identifier
-
+# ** See ANSWER BELOW **
 """ Sudo:
 take all items on page inside the classname 'inventory_list' and add to array of objects with following structure where 'i' is the number which the item is listed on the page:
 inventoryList = [
@@ -34,30 +39,39 @@ inventoryList = [
     ]
 """
 
-swagItem = driver.find_element(By.CLASS_NAME, "inventory_item")
-itemPrice = driver.find_element(By.CLASS_NAME, "inventory_item_price")
+#swagItem = driver.find_element(By.CLASS_NAME, "inventory_item")
+#itemPrice = driver.find_element(By.CLASS_NAME, "inventory_item_price")
 # print(swagItem.itemPrice)
 # for i in swagItem:
 #     print(i.text)
 
-# swagList= driver.find_element(By.CLASS_NAME, "inventory_list")
-# print(ET.tostring(swagList))
-# root = ET.fromstring(driver)
-# swagItems= []
-# for i in driver.find_element(By.CLASS_NAME, "inventory_list"):
-#     swagItems.append(ET.tostring(i))
-#     print(str(ET.tostring(i) + b"\n"))
+#                                 *************** ANSWER ***************
+# List of our non Unique elements
+swagList = driver.find_elements(By.CLASS_NAME, "inventory_item")
 
-# print("swagItems: ", swagItems)
-time.sleep(20)
+# Variables for item name/price (will use these to validate later)
+itemName = ""
+itemPrice = 0.00
 
+# Iterate through each item in swagList
+for inventoryItem in swagList:
 
-# swagTitle = driver.find_element(By.ID, "item_4_title_link").text
-# swagPrice = driver.find_element(By.CLASS_NAME)
+    # Get the name of the item we are iterating through (Notice we aren't using driver.find_element)
+    itemNameInList = inventoryItem.find_element(By.CLASS_NAME, "inventory_item_name")
 
-# 2. Click add to cart
-swagBackpack = driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack")
-swagBackpack.click()
+    # TODO: Eventually want to use a variable so we can get the item name and price for anything
+    if (itemNameInList.text == "Sauce Labs Backpack"):
+        
+        # Store name and price in variables
+        itemName = itemNameInList.text
+        itemPrice = inventoryItem.find_element(By.CLASS_NAME, "inventory_item_price").text
+
+        # Add to cart and break out of loop
+        driver.find_element(By.ID, "add-to-cart-sauce-labs-backpack").click()
+        break
+
+#                          *************** END ANSWER ***************
+
 time.sleep(2)
 
 # 3. Validate "Add to cart" button has updated text to "REMOVE"
@@ -108,8 +122,21 @@ checkoutContinue.click()
 time.sleep(1)
 
 # 8. Validate backpack is in cart using previously stored variables
+itemNameInCart = driver.find_element(By.CLASS_NAME, "inventory_item_name")
+try:
+    assert itemNameInCart.text == itemName
+    print(itemName + " was found in the cart")
+except:
+    print("Incorrect item was found in the cart...")
 
 # 9. Validate price using previously stored variable
+itemPriceInCart = driver.find_element(By.CLASS_NAME, "inventory_item_price")
+try:
+    # Check to see if the item price is correct
+    assert itemPriceInCart.text == itemPrice
+    print(itemPrice + " was found in the cart")
+except:
+    print("Incorrect item price was found for " + itemName)
 
 # 10. Click finish button
 checkoutFinish = driver.find_element(By.ID, "finish")
@@ -141,3 +168,6 @@ try:
     
 except:
     print("One or all of logon page IDs did not load properly") 
+
+# Close window when script is complete
+driver.close()
